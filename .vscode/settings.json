@@ -1,0 +1,11 @@
+{
+    "robloxLsp.diagnostics.globals": [
+        "Drawing",
+        "getgenv",
+        "old",
+        "optionBtnFrame"
+    ],
+    "robloxLsp.diagnostics.disable": [
+        "undefined-global"
+    ]
+}

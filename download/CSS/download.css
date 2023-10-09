@@ -1,0 +1,59 @@
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: "Space Grotesk";
+}
+
+.yourdownload {
+    color: white;
+    font-size: 50px;
+    font-family: "Space Grotesk", monospace;
+}
+
+#uwpver {
+    color: gray;
+    font-family: "Space Grotesk";
+}
+
+.LInjIs {
+    color: lightgray;
+    font-family: "Montserrat";
+    font-size: 20px;
+}
+
+.currentsupported {
+    margin-top: 15px;
+    color: gray;
+    text-align: justify;
+}
+
+#ToHome:hover {
+    transition: 300ms;
+    color: white !important;
+    font-weight: 600;
+}
+
+@media (max-width: 760px) {
+    .yourdownload {
+        font-size: 30px;
+    }
+
+    .LInjIs {
+        font-size: large;
+        margin-top: 5px;
+        text-align: left;
+    }
+}
+
+body {
+    background-image: linear-gradient(315deg, #101010, #090909);
+}
+
+.getfullscreen {
+    min-height: 1px;
+}
