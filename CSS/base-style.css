@@ -73,6 +73,7 @@ body {
 
 .main {
     background-image: linear-gradient(315deg, #101010, #090909);
+    background-image: -moz-linear-gradient(315deg, #101010, #090909);
 }
 
 .nav {
