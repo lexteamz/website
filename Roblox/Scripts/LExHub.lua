@@ -14,8 +14,7 @@
  * Thanks depso for the Silent Aim and Safe Enviroment Library.
  *
 --]]
-
-local Lux     = loadstring(game:HttpGet('https://lexploits.top/Roblox/Utility/Luxware.lua'))()
+local Lux = loadstring(game:HttpGet('https://lexploits.top/Roblox/Utility/Luxware.lua'))()
 local getsfenv = loadstring(game:HttpGet('https://rc7.glitch.me/Roblox/Safe_ENV.lua'))()
 local getsaim = loadstring(game:HttpGet('https://rc7.glitch.me/Roblox/Slient_Aim.lua'))()
 local LEx = {}
@@ -23,22 +22,22 @@ local LEx = {}
 -- / Create the Windows
 -- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-local Window           = Lux.CreateWindow("LExHub", "")
+local Window = Lux.CreateWindow('LExHub', '')
 
 -- / Aimbot Logic
 -- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-local Camera           = getsfenv.CurrentCamera
-local RunService       = getsfenv.GetService('RunService')
+local Camera = getsfenv.CurrentCamera
+local RunService = getsfenv.GetService('RunService')
 local UserInputService = getsfenv.GetService('UserInputService')
-local LocalPlayer      = getsfenv.GetPlayers()[1]
-local TweenService     = getsfenv.GetService('TweenService')
+local LocalPlayer = getsfenv.GetPlayers()[1]
+local TweenService = getsfenv.GetService('TweenService')
 
 getsfenv.getgenv().AimbotEnabled = false
-getsfenv.getgenv().TeamCheck     = false
-getsfenv.getgenv().Sensitivity   = 0
-getsfenv.getgenv().MaxDistance   = 100
-getsfenv.getgenv().AimPart       = "Head"
+getsfenv.getgenv().TeamCheck = false
+getsfenv.getgenv().Sensitivity = 0
+getsfenv.getgenv().MaxDistance = 100
+getsfenv.getgenv().AimPart = 'Head'
 
 UserInputService.InputBegan:Connect(
     function(Input)
@@ -83,13 +82,13 @@ RunService.RenderStepped:Connect(
 local Jailbreak = {}
 
 local function getvehiclepacket()
-    for i,v in next, getgc(true) do
-        if type(v) == "table" then
-            if rawget(v, "Event") and rawget(v, "GetVehiclePacket") then
+    for i, v in next, getgc(true) do
+        if type(v) == 'table' then
+            if rawget(v, 'Event') and rawget(v, 'GetVehiclePacket') then
                 Jailbreak.GetVehiclePacket = v.GetVehiclePacket
             end
         end
-    end    
+    end
 end
 
 function LEx.ModifyHeight(value)
@@ -116,29 +115,29 @@ function LEx.JailbreakSilentAim(bool)
 
     getsfenv.getgenv().old =
         getsfenv.getgenv().old or
-        require(game:GetService("ReplicatedStorage").Module.RayCast).RayIgnoreNonCollideWithIgnoreList
+        require(game:GetService('ReplicatedStorage').Module.RayCast).RayIgnoreNonCollideWithIgnoreList
 
     if getsfenv.getgenv().SilentToggled then
-        require(getsfenv.GetService("ReplicatedStorage").Module.RayCast).RayIgnoreNonCollideWithIgnoreList = function(
+        require(getsfenv.GetService('ReplicatedStorage').Module.RayCast).RayIgnoreNonCollideWithIgnoreList = function(
             ...)
             local nearestDistance, nearestEnemy = 600, nil
             for i, v in pairs(getsfenv.GetPlayers()) do
-                if v.Team ~= LocalPlayer.Team and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
+                if v.Team ~= LocalPlayer.Team and v.Character and v.Character:FindFirstChild('HumanoidRootPart') then
                     if
                         (v.Character.HumanoidRootPart.Position -
-                            getsfenv.GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <
+                            getsfenv.GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <
                             nearestDistance
                     then
                         nearestDistance, nearestEnemy =
                             (v.Character.HumanoidRootPart.Position -
-                                getsfenv.GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude,
+                                getsfenv.GetService('Players').LocalPlayer.Character.HumanoidRootPart.Position).Magnitude,
                             v
                     end
                 end
             end
             local arg = {old(...)}
             if
-                (tostring(getfenv(2).script) == "BulletEmitter" or tostring(getfenv(2).script) == "Taser") and
+                (tostring(getfenv(2).script) == 'BulletEmitter' or tostring(getfenv(2).script) == 'Taser') and
                     nearestEnemy
             then
                 arg[1] = nearestEnemy.Character.HumanoidRootPart
@@ -147,7 +146,7 @@ function LEx.JailbreakSilentAim(bool)
             return unpack(arg)
         end
     else
-        require(game:GetService("ReplicatedStorage").Module.RayCast).RayIgnoreNonCollideWithIgnoreList =
+        require(game:GetService('ReplicatedStorage').Module.RayCast).RayIgnoreNonCollideWithIgnoreList =
             getsfenv.getgenv().old
     end
 end
@@ -157,32 +156,89 @@ end
 -- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 function LEx.Jailbreak()
-    local JBTab         = Window:Tab   ("Jailbreak" , 14945719978                                           )
-    local JBCombat      = JBTab:Section("Combat Modifiers"                                                  )
+    local JBTab = Window:Tab('Jailbreak', 14945719978)
+    local JBCombat = JBTab:Section('Combat Modifiers')
 
-    JBCombat:Label    ("Combat Modifiers"                                                                   )
-    JBCombat:Toggle   ("Silent Aim"         ,         function(value)    LEx.JailbreakSilentAim  (value) end)
+    JBCombat:Label('Combat Modifiers')
+    JBCombat:Toggle(
+        'Silent Aim',
+        function(value)
+            LEx.JailbreakSilentAim(value)
+        end
+    )
 
-    local JBVehicle     = JBTab:Section("Vehicle Modifiers")
-    JBVehicle:Label   ("Jailbreak Vehicle Modifiers (hi mom)")
-    JBVehicle:Slider  ("Vehicle Height"    ,  1, 300, function(value)    LEx.ModifyHeight        (value) end)
-    JBVehicle:Slider  ("Vehicle Speed"     ,  1, 300, function(value)    LEx.ModifyGarageSpeed   (value) end)
-    JBVehicle:Slider  ("Vehicle Turn Speed",  1, 300, function(value)    LEx.ModifyTurnSpeed     (value) end)
+    local JBVehicle = JBTab:Section('Vehicle Modifiers')
+    JBVehicle:Label('Jailbreak Vehicle Modifiers (hi mom)')
+    JBVehicle:Slider(
+        'Vehicle Height',
+        1,
+        300,
+        function(value)
+            LEx.ModifyHeight(value)
+        end
+    )
+    JBVehicle:Slider(
+        'Vehicle Speed',
+        1,
+        300,
+        function(value)
+            LEx.ModifyGarageSpeed(value)
+        end
+    )
+    JBVehicle:Slider(
+        'Vehicle Turn Speed',
+        1,
+        300,
+        function(value)
+            LEx.ModifyTurnSpeed(value)
+        end
+    )
 end
 
-if getsfenv.Index(game, "PlaceId") == 606849621 then
+if getsfenv.Index(game, 'PlaceId') == 606849621 then
     LEx.Jailbreak()
 end
 
 -- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-local CombatTab       = Window:Tab("Combat")
-local EspTab          = Window:Tab("ESP")
+-- / Combat Section Beginning
+-- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-local MainAim         = CombatTab:Section("Aimbot")
+local CombatTab = Window:Tab('Combat')
 
-MainAim:Label         ("The classic Aimbot. (Camera)")
-MainAim:Toggle        ("Enabled",                                           function(value) getsfenv.getgenv().AimbotEnabled = value end)
-MainAim:Toggle        ("Team Check",                                        function(value) getsfenv.getgenv().TeamCheck     = value end)
-MainAim:Slider        ("Maximum Distance"  , 100, 10000,                    function(value) getsfenv.getgenv().MaxDistance   = value end)
-MainAim:DropDown      ("Aim Part"          , {"Head", "HumanoidRootPart"},  function(value) getsfenv.getgenv().AimPart       = value end)
+local MainAim = CombatTab:Section('Aimbot')
+
+MainAim:Label('The classic Aimbot. (Camera)')
+MainAim:Toggle(
+    'Enabled',
+    function(value)
+        getsfenv.getgenv().AimbotEnabled = value
+    end
+)
+MainAim:Toggle(
+    'Team Check',
+    function(value)
+        getsfenv.getgenv().TeamCheck = value
+    end
+)
+MainAim:Slider(
+    'Maximum Distance',
+    100,
+    10000,
+    function(value)
+        getsfenv.getgenv().MaxDistance = value
+    end
+)
+MainAim:DropDown(
+    'Aim Part',
+    {'Head', 'HumanoidRootPart'},
+    function(value)
+        getsfenv.getgenv().AimPart = value
+    end
+)
+
+-- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+-- / ESP Section Beginning
+-- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+local EspTab = Window:Tab('ESP')
