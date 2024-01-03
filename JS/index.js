@@ -9,7 +9,7 @@ var GoToFluxus = document.getElementById('Fluxus');
 var DownloadLInj = document.getElementById('downloadLInj');
 var GoToGitHub1 = document.getElementsByName('goToGitHub');
 var GoToDisc = document.getElementById('ToDisc');
-var AccountName;
+var AccountName = "";
 
 function GoToImage(event) {
     event.preventDefault();
