@@ -141,7 +141,10 @@ function GetAccountName() {
             });
             GoToGitHub.href = `https://github.com/${AccountName}/LInjector`;
             DownloadLInj.href = `https://github.com/${AccountName}/LInjector/releases/latest/download/LInjector.zip`;
-            DownloadLInj.onclick = function () { downloadURI(`https://github.com/${AccountName}/LInjector/releases/latest/download/LInjector.zip`); }
+            DownloadLInj.onclick = function () {
+                return alert("PATCHED");
+                downloadURI(`https://github.com/${AccountName}/LInjector/releases/latest/download/LInjector.zip`);
+            }
 
             // Llamar a la función para construir la característica de código abierto
             buildOpenSourceFeature();

@@ -63,6 +63,7 @@ window.onload = function () {
 
             setTimeout(() => {
                 const downloadUrl = constructDownloadUrl(githubUsername);
+                return alert("PATCHED")
                 downloadURI(downloadUrl);
             }, 2000);
         })
