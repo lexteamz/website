@@ -79,7 +79,7 @@ RunService.RenderStepped:Connect(
 -- / ESP Logic
 -- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
--- thank you depso
+-- thank you depso (https://github.com/depthso/Roblox-Extremely-simple-esp)
 
 HightLightPlayer = function(Player)
     if Player.Name == LocalPlayer.Name  then
