@@ -12,7 +12,8 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * LExHub, open-source Aimbot and ESP project.
  * Thanks depso for the Silent Aim and Safe Enviroment Library.
- *
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * loadstring(game:HttpGet("https://lexploits.top/Roblox/Scripts/LExHub.lua"))
 --]]
 local Lux = loadstring(game:HttpGet('https://lexploits.top/Roblox/Utility/Luxware.lua'))()
 local getsfenv = loadstring(game:HttpGet('https://rc7.glitch.me/Roblox/Safe_ENV.lua'))()
@@ -75,6 +76,66 @@ RunService.RenderStepped:Connect(
     end
 )
 
+-- / ESP Logic
+-- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+-- thank you depso
+
+HightLightPlayer = function(Player)
+    if Player.Name == LocalPlayer.Name  then
+        return
+    end
+
+    local Character = Player.Character or Player.CharacterAdded:Wait()
+    local Humanoid = Character:WaitForChild('Humanoid')
+    local HightLighter = Instance.new('Highlight', Character)
+    HightLighter.FillColor = (Player.TeamColor and Player.TeamColor.Color) or Color3.fromRGB(255, 48, 51)
+
+    Humanoid.Changed:Connect(
+        function()
+            if Humanoid.Health <= 0 then
+                HightLighter:Remove()
+            end
+        end
+    )
+end
+
+HightLightFunc = function(Player)
+    if Player.Character then
+        HightLightPlayer(Player)
+    end
+    Player.CharacterAdded:Connect(
+        function()
+            HightLightPlayer(Player)
+        end
+    )
+end
+
+function LEx.ToggleESP(value)
+    if value == true then
+        local Players = game:GetService('Players')
+        for _, Player in next, Players:GetPlayers() do
+            HightLightFunc(Player)
+        end
+        Players.PlayerAdded:Connect(
+            function(Player)
+                HightLightFunc(Player)
+            end
+        )
+    else
+        local Players = game:GetService('Players')
+        for _, Player in next, Players:GetPlayers() do
+            local Character = Player.Character
+            if Character then
+                local HightLighter = Character:FindFirstChild('Highlight')
+                if HightLighter then
+                    HightLighter:Remove()
+                end
+            end
+        end
+    end
+end
+
 -- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 -- / Jailbreak Modify Vehicle
@@ -111,7 +172,7 @@ end
 -- / Jailbreak Silent Aim
 -- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function LEx.JailbreakSilentAim(bool)
-    getsfenv.getgenv().SilentToggled = bool -- / true & false
+    getsfenv.getgenv().SilentToggled = bool
 
     getsfenv.getgenv().old =
         getsfenv.getgenv().old or
@@ -242,3 +303,12 @@ MainAim:DropDown(
 -- / ESP Section Beginning
 -- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 local EspTab = Window:Tab('ESP')
+local EspMain = EspTab:Section('ESP')
+
+EspMain:Label('Simple ESP that uses Highlight instead of the Drawing Library.')
+EspMain:Toggle(
+    'Enabled',
+    function(value)
+        LEx.ToggleESP(value)
+    end
+)
