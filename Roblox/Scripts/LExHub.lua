@@ -10,7 +10,7 @@
  * | ▓▓     \ ▓▓     \  ▓▓ \▓▓\ ▓▓  | ▓▓\▓▓    ▓▓ ▓▓    ▓▓
  *  \▓▓▓▓▓▓▓▓\▓▓▓▓▓▓▓▓\▓▓   \▓▓\▓▓   \▓▓ \▓▓▓▓▓▓ \▓▓▓▓▓▓▓
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * LExHub, closed-source Aimbot and ESP project.
+ * LExHub, open-source Aimbot and ESP project.
  * Thanks depso for the Silent Aim and Safe Enviroment Library.
  *
 --]]
