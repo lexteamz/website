@@ -13,7 +13,7 @@
  * LExHub, open-source Aimbot and ESP project.
  * Thanks depso for the Silent Aim and Safe Enviroment Library.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * loadstring(game:HttpGet("https://lexploits.top/Roblox/Scripts/LExHub.lua"))
+ * loadstring(game:HttpGet("https://lexploits.top/Roblox/Scripts/LExHub.lua"))()
 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --]]
 local Lux = loadstring(game:HttpGet('https://lexploits.top/Roblox/Utility/Luxware.lua'))()
