@@ -14,6 +14,7 @@
  * Thanks depso for the Silent Aim and Safe Enviroment Library.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * loadstring(game:HttpGet("https://lexploits.top/Roblox/Scripts/LExHub.lua"))
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --]]
 local Lux = loadstring(game:HttpGet('https://lexploits.top/Roblox/Utility/Luxware.lua'))()
 local getsfenv = loadstring(game:HttpGet('https://rc7.glitch.me/Roblox/Safe_ENV.lua'))()
