@@ -82,8 +82,28 @@ RunService.RenderStepped:Connect(
 
 -- thank you depso (https://github.com/depthso/Roblox-Extremely-simple-esp)
 
+getsfenv.getgenv().ESP_TEAMCHECK = nil
+
+LEx.Update_ESP_TEAMCHECK = function(value)
+    if value == true then
+        for _, Player in next, Players:GetPlayers() do
+            if Player ~= LocalPlayer and Player.Team == LocalPlayer.Team then
+                local Character = Player.Character
+                if Character then
+                    for _, child in ipairs(Character:GetChildren()) do
+                        if child:IsA('Highlight') then
+                            child.FillColor = Player.TeamColor.Color
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+
 HightLightPlayer = function(Player)
-    if Player.Name == LocalPlayer.Name  then
+    if Player.Name == LocalPlayer.Name then
         return
     end
 
@@ -306,10 +326,17 @@ MainAim:DropDown(
 local EspTab = Window:Tab('ESP')
 local EspMain = EspTab:Section('ESP')
 
-EspMain:Label('Simple ESP that uses Highlight instead of the Drawing Library.')
+EspMain:Label('Simple ESP with Highlight')
 EspMain:Toggle(
     'Enabled',
     function(value)
         LEx.ToggleESP(value)
+    end
+)
+
+EspMain:Toggle(
+    'Team Check',
+    function(value)
+        LEx.Update_ESP_TEAMCHECK(value)
     end
 )
