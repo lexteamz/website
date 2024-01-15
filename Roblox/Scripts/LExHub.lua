@@ -129,7 +129,7 @@ function LEx.ToggleESP(value)
             local Character = Player.Character
             if Character then
                 local HightLighter = Character:FindFirstChild('Highlight')
-                if HightLighter then
+                if HightLighter and HightLighter:IsA("Highlight") then
                     HightLighter:Remove()
                 end
             end
