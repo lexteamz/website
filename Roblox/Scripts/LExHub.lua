@@ -24,7 +24,7 @@ local LEx = {}
 -- / Create the Windows
 -- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-local Window = Lux.CreateWindow('LExHub', '')
+local Window = Lux.CreateWindow('LExHub', nil)
 
 -- / Aimbot Logic
 -- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
