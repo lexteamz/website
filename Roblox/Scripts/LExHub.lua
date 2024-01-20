@@ -114,7 +114,7 @@ end
 
 function LEx.ToggleESP(value)
     if value == true then
-        local Players = game:GetService('Players')
+        local Players = getsfenv.GetService('Players')
         for _, Player in next, Players:GetPlayers() do
             HightLightFunc(Player)
         end
@@ -124,7 +124,7 @@ function LEx.ToggleESP(value)
             end
         )
     else
-        local Players = game:GetService('Players')
+        local Players = getsfenv.GetService('Players')
         for _, Player in next, Players:GetPlayers() do
             local Character = Player.Character
             if Character then
