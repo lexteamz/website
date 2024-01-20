@@ -7,6 +7,5 @@
     ],
     "robloxLsp.diagnostics.disable": [
         "undefined-global"
-    ],
-    "CodeGPT.apiKey": "OpenAI"
+    ]
 }
