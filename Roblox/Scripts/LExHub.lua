@@ -129,7 +129,7 @@ function LEx.ToggleESP(value)
             local Character = Player.Character
             if Character then
                 local HightLighter = Character:FindFirstChild('Highlight')
-                if HightLighter and HightLighter:IsA("Highlight") then
+                if HightLighter and HightLighter:IsA('Highlight') then
                     HightLighter:Remove()
                 end
             end
@@ -153,19 +153,16 @@ local function getvehiclepacket()
     end
 end
 
-function LEx.ModifyHeight(value)
+function LEx.ModifyCar(what, value)
     getvehiclepacket()
-    Jailbreak.GetVehiclePacket().Height = value
-end
-
-function LEx.ModifyTurnSpeed(value)
-    getvehiclepacket()
-    Jailbreak.GetVehiclePacket().GetVehiclePacket().TurnSpeed = value
-end
-
-function LEx.ModifyGarageSpeed(value)
-    getvehiclepacket()
-    Jailbreak.GetVehiclePacket().GarageEngineSpeed = value
+    if what == 'Height' then
+        Jailbreak.GetVehiclePacket().Height = value
+    elseif what == 'TurnSpeed' then
+        getvehiclepacket()
+        Jailbreak.GetVehiclePacket().GetVehiclePacket().TurnSpeed = value
+    elseif what == 'GarageSpeed' then
+        Jailbreak.GetVehiclePacket().GarageEngineSpeed = value
+    end
 end
 
 -- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -236,7 +233,7 @@ function LEx.Jailbreak()
         1,
         300,
         function(value)
-            LEx.ModifyHeight(value)
+            LEx.ModifyCar('Height', value)
         end
     )
     JBVehicle:Slider(
@@ -244,7 +241,7 @@ function LEx.Jailbreak()
         1,
         300,
         function(value)
-            LEx.ModifyGarageSpeed(value)
+            LEx.ModifyCar('GarageSpeed', value)
         end
     )
     JBVehicle:Slider(
@@ -252,7 +249,7 @@ function LEx.Jailbreak()
         1,
         300,
         function(value)
-            LEx.ModifyTurnSpeed(value)
+            LEx.ModifyCar('TurnSpeed', value)
         end
     )
 end
