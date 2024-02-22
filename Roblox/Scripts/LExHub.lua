@@ -155,15 +155,23 @@ end
 
 function LEx.ModifyCar(what, value)
     getvehiclepacket()
-    if what == 'Height' then
-        Jailbreak.GetVehiclePacket().Height = value
-    elseif what == 'TurnSpeed' then
-        getvehiclepacket()
-        Jailbreak.GetVehiclePacket().GetVehiclePacket().TurnSpeed = value
-    elseif what == 'GarageSpeed' then
-        Jailbreak.GetVehiclePacket().GarageEngineSpeed = value
+    local vehiclePacket = Jailbreak.GetVehiclePacket()
+
+    if what == 'TurnSpeed' then
+        vehiclePacket = vehiclePacket:GetVehiclePacket()
+    end
+
+    if vehiclePacket then
+        if what == 'Height' then
+            vehiclePacket.Height = value
+        elseif what == 'TurnSpeed' then
+            vehiclePacket.TurnSpeed = value
+        elseif what == 'GarageSpeed' then
+            vehiclePacket.GarageEngineSpeed = value
+        end
     end
 end
+
 
 -- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

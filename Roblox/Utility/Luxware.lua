@@ -1,5 +1,38 @@
 local Luxt1 = {}
 
+local _DEBUG = false
+
+function randomstr(len)
+	local Lenght = 0
+	local Generated = ''
+
+	if not len then
+		Lenght = math.random(8, 32)
+	else
+		Lenght = len
+	end
+
+	local upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+	local lowerCase = 'abcdefghijklmnopqrstuvwxyz'
+	local numbers = '0123456789'
+	local symbols = '!@#$%&()*+-,./\\:;<=>?^[]{}'
+	local CharacterSet = upperCase .. lowerCase .. numbers .. symbols
+
+	for i = 1, Lenght do
+		local rand = math.random(#CharacterSet)
+		Generated = Generated .. string.sub(CharacterSet, rand, rand)
+	end
+
+	return Generated
+end
+
+function cryptobj(Obj)
+	Obj.Name = randomstr()
+	for _, Descendant in next, Obj:GetDescendants() do
+		Descendant.Name = randomstr()
+	end
+end
+
 function Luxt1.CreateWindow(libName, logoId)
 	local LuxtLib = Instance.new("ScreenGui")
 	local shadow = Instance.new("ImageLabel")
@@ -22,7 +55,11 @@ function Luxt1.CreateWindow(libName, logoId)
 	local key1 = Instance.new("TextButton")
 	local UICorner = Instance.new("UICorner")
 	local keybindInfo1 = Instance.new("TextLabel")
-
+	
+	local bozo = Instance.new("UIGradient")
+	bozo.Color = ColorSequence.new{ColorSequenceKeypoint.new(0,Color3.new(0.576471,0.203922,1)),ColorSequenceKeypoint.new(1,Color3.new(0.168627,1,0.862745))}
+	bozo.Parent = hubName
+	
 	key1.Name = "key1"
 	key1.Parent = sideHeading
 	key1.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
@@ -35,6 +72,12 @@ function Luxt1.CreateWindow(libName, logoId)
 	key1.TextSize = 14.000
 
 	local oldKey = Enum.KeyCode.Insert.Name
+	
+	function Luxt1:Panic()
+		for _, v in ipairs(LuxtLib:GetDescendants()) do
+			v:remove()
+		end
+	end
 
 	key1.MouseButton1Click:connect(function(e) 
 		key1.Text = ". . ."
@@ -110,8 +153,16 @@ function Luxt1.CreateWindow(libName, logoId)
 	logoId = logoId or ""
 	--
 
-	LuxtLib.Name = "LuxtLib"..libName
-	LuxtLib.Parent = game:GetService("CoreGui")
+	LuxtLib.Name = randomstr()
+	if _DEBUG == true then
+		LuxtLib.Parent = game.Players.LocalPlayer.PlayerGui
+		print("Luxware UI - Debug")
+	else
+		LuxtLib.Parent = game:GetService("CoreGui")
+	end
+	
+	
+	LuxtLib.ResetOnSpawn = false
 	LuxtLib.DisplayOrder = 2147483647 -- max 32 bit number lul
 	LuxtLib.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -160,8 +211,8 @@ function Luxt1.CreateWindow(libName, logoId)
 	hubName.ZIndex = 2
 	hubName.Font = Enum.Font.GothamSemibold
 	hubName.Text = libName
-	hubName.TextColor3 = Color3.fromRGB(153, 255, 238)
-	hubName.TextSize = 14.000
+	hubName.TextColor3 = Color3.fromRGB(255, 255, 255)
+	hubName.TextSize = 16
 	hubName.TextWrapped = true
 	hubName.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -189,7 +240,7 @@ function Luxt1.CreateWindow(libName, logoId)
 	usename.ZIndex = 2
 	usename.Font = Enum.Font.GothamSemibold
 	usename.Text = game.Players.LocalPlayer.DisplayName
-	usename.TextColor3 = Color3.fromRGB(103, 172, 161)
+	usename.TextColor3 = Color3.fromRGB(255, 255, 255)
 	usename.TextSize = 12.000
 	usename.TextWrapped = true
 	usename.TextXAlignment = Enum.TextXAlignment.Left
@@ -696,15 +747,23 @@ function Luxt1.CreateWindow(libName, logoId)
 							if not keyDebounce then
 								keyDebounce = true
 								callback()
-								keybindFrame:TweenSize(UDim2.new(0, 359,0, 30), "InOut", "Quint", 0.18, true)
-								wait(0.18)
-								keybindFrame:TweenSize(UDim2.new(0, 365,0, 36), "InOut", "Quint", 0.18, true)
-								wait(0.5)
+
+								if keybindFrame and keybindFrame.Parent then
+									keybindFrame:TweenSize(UDim2.new(0, 359, 0, 30), "InOut", "Quint", 0.18, true)
+									wait(0.18)
+
+									if keybindFrame and keybindFrame.Parent then
+										keybindFrame:TweenSize(UDim2.new(0, 365, 0, 36), "InOut", "Quint", 0.18, true)
+										wait(0.5)
+									end
+								end
+
 								keyDebounce = false
 							end
 						end
 					end
 				end)
+
 			end
 
 			function ItemHandling:TextBox(infbix, textPlace, callback)
@@ -753,16 +812,17 @@ function Luxt1.CreateWindow(libName, logoId)
 				textboxInfo.TextXAlignment = Enum.TextXAlignment.Left
 
 				TextBox.Parent = textboxFrame
-				TextBox.BackgroundColor3 = Color3.fromRGB(153, 255, 238)
+				TextBox.BackgroundColor3 = Color3.fromHex("#2f2f2f")
+				TextBox.BackgroundTransparency = 0.5
 				TextBox.ClipsDescendants = true
 				TextBox.Position = UDim2.new(0.0250000004, 0, 0.194000006, 0)
 				TextBox.Size = UDim2.new(0, 100, 0, 22)
 				TextBox.ZIndex = 2
 				TextBox.ClearTextOnFocus = false
 				TextBox.Font = Enum.Font.GothamSemibold
-				TextBox.PlaceholderColor3 = Color3.fromRGB(24, 24, 24)
+				TextBox.PlaceholderColor3 = Color3.fromRGB(124, 124, 124)
 				TextBox.Text = ""
-				TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+				TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 				TextBox.TextSize = 13.000
 				TextBox.PlaceholderText = textPlace
 
@@ -811,7 +871,7 @@ function Luxt1.CreateWindow(libName, logoId)
 				local UICorner_2 = Instance.new("UICorner")
 				local dragSlider = Instance.new("Frame")
 				local UICorner_3 = Instance.new("UICorner")
-				local dragPrecent = Instance.new("TextLabel")
+				local dragPrecent = Instance.new("TextBox")
 				local UICorner_4 = Instance.new("UICorner")
 				local triangle = Instance.new("ImageLabel")
 				local precentlist = Instance.new("UIListLayout")
@@ -849,6 +909,7 @@ function Luxt1.CreateWindow(libName, logoId)
 				sliderbtn.Position = UDim2.new(0.0167808235, 0, 0.416333348, 0)
 				sliderbtn.Size = UDim2.new(0, 150, 0, 6)
 				sliderbtn.ZIndex = 2
+				sliderbtn.LayoutOrder = 2
 				sliderbtn.AutoButtonColor = false
 				sliderbtn.Font = Enum.Font.SourceSans
 				sliderbtn.Text = ""
@@ -875,10 +936,11 @@ function Luxt1.CreateWindow(libName, logoId)
 				dragPrecent.Size = UDim2.new(0, 44, 0, 15)
 				dragPrecent.ZIndex = 2
 				dragPrecent.Font = Enum.Font.GothamSemibold
-				dragPrecent.Text = "0%"
+				dragPrecent.Text = "\0"
 				dragPrecent.TextColor3 = Color3.fromRGB(255, 255, 255)
 				dragPrecent.TextSize = 12.000
 				dragPrecent.BackgroundTransparency = 1
+				dragPrecent.ClearTextOnFocus = false
 				dragPrecent.TextTransparency = 1
 
 				UICorner_4.CornerRadius = UDim.new(0, 3)
@@ -940,6 +1002,7 @@ function Luxt1.CreateWindow(libName, logoId)
 				sliderInfo.Position = UDim2.new(0.466095895, 0, 0, 0)
 				sliderInfo.Size = UDim2.new(0, 193, 0, 36)
 				sliderInfo.ZIndex = 2
+				sliderInfo.LayoutOrder = 0
 				sliderInfo.Font = Enum.Font.GothamSemibold
 				sliderInfo.Text = slidInfo
 				sliderInfo.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -976,7 +1039,48 @@ function Luxt1.CreateWindow(libName, logoId)
 							releaseconnection:Disconnect()
 						end
 					end)
+
+					dragPrecent.FocusLost:Connect(function()
+						local newValue = tonumber(dragPrecent.Text)
+						if newValue then
+							Value = math.clamp(newValue, tonumber(minvalue), tonumber(maxvalue))
+							pcall(function()
+								callback(Value)
+							end)
+							local newSliderSize = math.floor(((Value - tonumber(minvalue)) / (tonumber(maxvalue) - tonumber(minvalue))) * 150)
+							dragSlider.Size = UDim2.new(0, math.clamp(newSliderSize, 0, 150), 0, 6)
+							dragPrecent.Text = Value
+						end
+						
+						game.TweenService:Create(dragPrecent, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{
+							BackgroundTransparency = 1,
+							TextTransparency = 1
+						}):Play()
+						game.TweenService:Create(triangle, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{
+							ImageTransparency = 1
+						}):Play()
+					end)
 				end)
+				
+				local function hideSliderProps()
+					game.TweenService:Create(dragPrecent, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{
+						BackgroundTransparency = 1,
+						TextTransparency = 1
+					}):Play()
+					game.TweenService:Create(triangle, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{
+						ImageTransparency = 1
+					}):Play()
+				end
+				
+				local function showSliderProps()
+					game.TweenService:Create(dragPrecent, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{
+						BackgroundTransparency = 0,
+						TextTransparency = 0
+					}):Play()
+					game.TweenService:Create(triangle, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{
+						ImageTransparency = 0
+					}):Play()
+				end
 
 				function anim(property)
 					if property == "Size" then
@@ -986,26 +1090,8 @@ function Luxt1.CreateWindow(libName, logoId)
 					end
 				end
 				dragSlider.Changed:Connect(anim)
-
-				sliderbtn.MouseButton1Up:Connect(function()
-					game.TweenService:Create(dragPrecent, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{
-						BackgroundTransparency = 1,
-						TextTransparency = 1
-					}):Play()
-					game.TweenService:Create(triangle, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{
-						ImageTransparency = 1
-					}):Play()
-				end)
-
-				sliderbtn.MouseButton1Down:Connect(function()
-					game.TweenService:Create(dragPrecent, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{
-						BackgroundTransparency = 0,
-						TextTransparency = 0
-					}):Play()
-					game.TweenService:Create(triangle, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{
-						ImageTransparency = 0
-					}):Play()
-				end)
+				sliderbtn.MouseButton1Up:Connect(hideSliderProps)
+				sliderbtn.MouseButton1Down:Connect(showSliderProps)
 			end
 
 			function ItemHandling:Label(labelInfo)
@@ -1252,12 +1338,13 @@ function Luxt1.CreateWindow(libName, logoId)
 					end)
 				end
 			end
-
+			
+			cryptobj(LuxtLib)
+			
 			return ItemHandling
 		end
 		return sectionHandling
 	end
 	return TabHandling
 end
-
 return Luxt1
