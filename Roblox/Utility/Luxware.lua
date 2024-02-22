@@ -239,8 +239,8 @@ function Luxt1.CreateWindow(libName, logoId)
 	usename.Size = UDim2.new(0, 110, 0, 16)
 	usename.ZIndex = 2
 	usename.Font = Enum.Font.GothamSemibold
-	usename.Text = game.Players.LocalPlayer.DisplayName
-	usename.TextColor3 = Color3.fromRGB(255, 255, 255)
+	usename.Text = game:GetService("Players").LocalPlayer.DisplayName
+	usename.TextColor3 = Color3.fromRGB(14, 4, 4)
 	usename.TextSize = 12.000
 	usename.TextWrapped = true
 	usename.TextXAlignment = Enum.TextXAlignment.Left
