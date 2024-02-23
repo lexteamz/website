@@ -1,5 +1,13 @@
 local Luxt1 = {}
 
+--[[
+	Luxware UI Library
+	Created by xHeptc specifically for Luxware
+	(https://github.com/xHeptc/Luxware-UI-Library)
+
+	Forked and Improved by Excel
+]]
+
 local _DEBUG = false
 
 function randomstr(len)
