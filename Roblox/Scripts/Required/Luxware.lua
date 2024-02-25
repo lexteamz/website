@@ -1,5 +1,3 @@
-local Luxt1 = {}
-
 --[[
 	Luxware UI Library
 	Created by xHeptc specifically for Luxware
@@ -8,11 +6,13 @@ local Luxt1 = {}
 	Forked and Improved by Excel
 ]]
 
+local Luxt1 = {}
+
 local _DEBUG = false
 
 function randomstr(len)
 	local Lenght = 0
-	local Generated = ''
+	local Generated = ""
 
 	if not len then
 		Lenght = math.random(8, 32)
@@ -20,10 +20,10 @@ function randomstr(len)
 		Lenght = len
 	end
 
-	local upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-	local lowerCase = 'abcdefghijklmnopqrstuvwxyz'
-	local numbers = '0123456789'
-	local symbols = '!@#$%&()*+-,./\\:;<=>?^[]{}'
+	local upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	local lowerCase = "abcdefghijklmnopqrstuvwxyz"
+	local numbers = "0123456789"
+	local symbols = "!@#$%&()*+-,./\\:;<=>?^[]{}"
 	local CharacterSet = upperCase .. lowerCase .. numbers .. symbols
 
 	for i = 1, Lenght do
@@ -63,11 +63,14 @@ function Luxt1.CreateWindow(libName, logoId)
 	local key1 = Instance.new("TextButton")
 	local UICorner = Instance.new("UICorner")
 	local keybindInfo1 = Instance.new("TextLabel")
-	
+
 	local bozo = Instance.new("UIGradient")
-	bozo.Color = ColorSequence.new{ColorSequenceKeypoint.new(0,Color3.new(0.576471,0.203922,1)),ColorSequenceKeypoint.new(1,Color3.new(0.168627,1,0.862745))}
+	bozo.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0, Color3.new(0.576471, 0.203922, 1)),
+		ColorSequenceKeypoint.new(1, Color3.new(0.168627, 1, 0.862745)),
+	})
 	bozo.Parent = hubName
-	
+
 	key1.Name = "key1"
 	key1.Parent = sideHeading
 	key1.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
@@ -80,25 +83,25 @@ function Luxt1.CreateWindow(libName, logoId)
 	key1.TextSize = 14.000
 
 	local oldKey = Enum.KeyCode.Insert.Name
-	
+
 	function Luxt1:Panic()
 		for _, v in ipairs(LuxtLib:GetDescendants()) do
 			v:remove()
 		end
 	end
 
-	key1.MouseButton1Click:connect(function(e) 
+	key1.MouseButton1Click:connect(function(e)
 		key1.Text = ". . ."
-		local a, b = game:GetService('UserInputService').InputBegan:wait();
+		local a, b = game:GetService("UserInputService").InputBegan:wait()
 		if a.KeyCode.Name ~= "Unknown" then
 			key1.Text = a.KeyCode.Name
-			oldKey = a.KeyCode.Name;
+			oldKey = a.KeyCode.Name
 		end
 	end)
 
-	game:GetService("UserInputService").InputBegan:connect(function(current, ok) 
-		if not ok then 
-			if current.KeyCode.Name == oldKey then 
+	game:GetService("UserInputService").InputBegan:connect(function(current, ok)
+		if not ok then
+			if current.KeyCode.Name == oldKey then
 				if LuxtLib.Enabled == true then
 					LuxtLib.Enabled = false
 				else
@@ -134,7 +137,10 @@ function Luxt1.CreateWindow(libName, logoId)
 	local FramePosition
 	local Draggable = false
 	TopBar.InputBegan:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		if
+			input.UserInputType == Enum.UserInputType.MouseButton1
+			or input.UserInputType == Enum.UserInputType.Touch
+		then
 			Draggable = true
 			DragMousePosition = Vector2.new(input.Position.X, input.Position.Y)
 			FramePosition = Vector2.new(shadow.Position.X.Scale, shadow.Position.Y.Scale)
@@ -142,13 +148,17 @@ function Luxt1.CreateWindow(libName, logoId)
 	end)
 	UserInputService.InputChanged:Connect(function(input)
 		if Draggable == true then
-			local NewPosition = FramePosition + ((Vector2.new(input.Position.X, input.Position.Y) - DragMousePosition) / Camera.ViewportSize)
+			local NewPosition = FramePosition
+				+ ((Vector2.new(input.Position.X, input.Position.Y) - DragMousePosition) / Camera.ViewportSize)
 			shadow.Position = UDim2.new(NewPosition.X, 0, NewPosition.Y, 0)
 		end
 	end)
 
 	UserInputService.InputEnded:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		if
+			input.UserInputType == Enum.UserInputType.MouseButton1
+			or input.UserInputType == Enum.UserInputType.Touch
+		then
 			Draggable = false
 		end
 	end)
@@ -168,8 +178,7 @@ function Luxt1.CreateWindow(libName, logoId)
 	else
 		LuxtLib.Parent = game:GetService("CoreGui")
 	end
-	
-	
+
 	LuxtLib.ResetOnSpawn = false
 	LuxtLib.DisplayOrder = 2147483647 -- max 32 bit number lul
 	LuxtLib.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -177,7 +186,7 @@ function Luxt1.CreateWindow(libName, logoId)
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = shadow
 	MainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-	MainFrame.Position = UDim2.new(0.048, 0,0.075, 0)
+	MainFrame.Position = UDim2.new(0.048, 0, 0.075, 0)
 	MainFrame.Size = UDim2.new(0, 553, 0, 452)
 
 	sideHeading.Name = "sideHeading"
@@ -204,7 +213,7 @@ function Luxt1.CreateWindow(libName, logoId)
 	hubLogo.Position = UDim2.new(0.0567928664, 0, 0.0243411884, 0)
 	hubLogo.Size = UDim2.new(0, 30, 0, 30)
 	hubLogo.ZIndex = 2
-	hubLogo.Image = "rbxassetid://"..logoId
+	hubLogo.Image = "rbxassetid://" .. logoId
 
 	MainCorner_2.CornerRadius = UDim.new(0, 999)
 	MainCorner_2.Name = "MainCorner"
@@ -324,21 +333,21 @@ function Luxt1.CreateWindow(libName, logoId)
 		tabBtn.TextXAlignment = Enum.TextXAlignment.Left
 
 		tabLogo.Name = "tabLogo"
-		tabLogo.Position = UDim2.new(-0.007, 0,0.067, 0)
+		tabLogo.Position = UDim2.new(-0.007, 0, 0.067, 0)
 		tabLogo.Parent = tabBtnFrame
 		tabLogo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		tabLogo.BackgroundTransparency = 1.000
 		tabLogo.BorderSizePixel = 0
 		tabLogo.Size = UDim2.new(0, 25, 0, 25)
 		tabLogo.ZIndex = 2
-		tabLogo.Image = "rbxassetid://"..tabId
+		tabLogo.Image = "rbxassetid://" .. tabId
 		tabLogo.ImageColor3 = Color3.fromRGB(153, 255, 238)
 		--
 
 		local newPage = Instance.new("ScrollingFrame")
 		local sectionList = Instance.new("UIListLayout")
 
-		newPage.Name = "newPage"..tabText
+		newPage.Name = "newPage" .. tabText
 		newPage.Parent = pageFolder
 		newPage.Active = true
 		newPage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -354,13 +363,14 @@ function Luxt1.CreateWindow(libName, logoId)
 		sectionList.SortOrder = Enum.SortOrder.LayoutOrder
 		sectionList.Padding = UDim.new(0, 3)
 
-
 		local function UpdateSize()
 			local cS = sectionList.AbsoluteContentSize
 
-			game.TweenService:Create(newPage, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-				CanvasSize = UDim2.new(0,cS.X,0,cS.Y)
-			}):Play()
+			game.TweenService
+				:Create(newPage, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+					CanvasSize = UDim2.new(0, cS.X, 0, cS.Y),
+				})
+				:Play()
 		end
 		UpdateSize()
 		newPage.ChildAdded:Connect(UpdateSize)
@@ -368,33 +378,41 @@ function Luxt1.CreateWindow(libName, logoId)
 
 		tabBtn.MouseButton1Click:Connect(function()
 			UpdateSize()
-			for i,v in next, pageFolder:GetChildren() do
+			for i, v in next, pageFolder:GetChildren() do
 				UpdateSize()
 				v.Visible = false
 			end
 			newPage.Visible = true
-			for i,v in next, tabFrame:GetChildren() do
+			for i, v in next, tabFrame:GetChildren() do
 				if v:IsA("Frame") then
-					for i,v in next, v:GetChildren() do
+					for i, v in next, v:GetChildren() do
 						if v:IsA("TextButton") then
-							game.TweenService:Create(v, TweenInfo.new(0.18, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {
-								TextColor3 = Color3.fromRGB(35, 59, 55)
-							}):Play()
+							game.TweenService
+								:Create(v, TweenInfo.new(0.18, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {
+									TextColor3 = Color3.fromRGB(35, 59, 55),
+								})
+								:Play()
 						end
 						if v:IsA("ImageLabel") then
-							game.TweenService:Create(v, TweenInfo.new(0.18, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {
-								ImageColor3 = Color3.fromRGB(35, 59, 55)
-							}):Play()
+							game.TweenService
+								:Create(v, TweenInfo.new(0.18, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {
+									ImageColor3 = Color3.fromRGB(35, 59, 55),
+								})
+								:Play()
 						end
 					end
 				end
 			end
-			game.TweenService:Create(tabLogo, TweenInfo.new(0.18, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {
-				ImageColor3 = Color3.fromRGB(153, 255, 238)
-			}):Play()
-			game.TweenService:Create(tabBtn, TweenInfo.new(0.18, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {
-				TextColor3 = Color3.fromRGB(153, 255, 238)
-			}):Play()
+			game.TweenService
+				:Create(tabLogo, TweenInfo.new(0.18, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {
+					ImageColor3 = Color3.fromRGB(153, 255, 238),
+				})
+				:Play()
+			game.TweenService
+				:Create(tabBtn, TweenInfo.new(0.18, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {
+					TextColor3 = Color3.fromRGB(153, 255, 238),
+				})
+				:Play()
 		end)
 
 		local sectionHandling = {}
@@ -422,7 +440,7 @@ function Luxt1.CreateWindow(libName, logoId)
 			sectionFrame.Parent = newPage
 			sectionFrame.BackgroundColor3 = Color3.fromRGB(21, 21, 21)
 			sectionFrame.Position = UDim2.new(0, 0, 7.08064434e-08, 0)
-			sectionFrame.Size = UDim2.new(1, 0,0, 36)
+			sectionFrame.Size = UDim2.new(1, 0, 0, 36)
 			sectionFrame.ZIndex = 2
 			sectionFrame.ClipsDescendants = true
 
@@ -462,18 +480,27 @@ function Luxt1.CreateWindow(libName, logoId)
 			sectionExpannd.MouseButton1Click:Connect(function()
 				if isDropped then
 					isDropped = false
-					sectionFrame:TweenSize(UDim2.new(1, 0,0, 36), "In", "Quint", 0.10)
-					game.TweenService:Create(sectionExpannd, TweenInfo.new(0.10, Enum.EasingStyle.Quad, Enum.EasingDirection.In),{
-						Rotation = 0
-					}):Play()
+					sectionFrame:TweenSize(UDim2.new(1, 0, 0, 36), "In", "Quint", 0.10)
+					game.TweenService
+						:Create(sectionExpannd, TweenInfo.new(0.10, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
+							Rotation = 0,
+						})
+						:Play()
 					wait(0.10)
 					UpdateSize()
 				else
 					isDropped = true
-					sectionFrame:TweenSize(UDim2.new(1,0, 0, sectionInnerList.AbsoluteContentSize.Y + 5), "In", "Quint", 0.10)
-					game.TweenService:Create(sectionExpannd, TweenInfo.new(0.10, Enum.EasingStyle.Quad, Enum.EasingDirection.In),{
-						Rotation = 180
-					}):Play()
+					sectionFrame:TweenSize(
+						UDim2.new(1, 0, 0, sectionInnerList.AbsoluteContentSize.Y + 5),
+						"In",
+						"Quint",
+						0.10
+					)
+					game.TweenService
+						:Create(sectionExpannd, TweenInfo.new(0.10, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
+							Rotation = 180,
+						})
+						:Play()
 					wait(0.10)
 					UpdateSize()
 				end
@@ -528,38 +555,50 @@ function Luxt1.CreateWindow(libName, logoId)
 				UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
 
 				TextButton.MouseButton1Up:Connect(function()
-					TextButton:TweenSize(UDim2.new(0, 365,0, 36), "InOut", "Quint", 0.18, true)
-					game.TweenService:Create(TextButton, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),{
-						BackgroundColor3 = Color3.fromRGB(18,18,18),
-						TextColor3 = Color3.fromRGB(180, 180, 180)
-					}):Play()
+					TextButton:TweenSize(UDim2.new(0, 365, 0, 36), "InOut", "Quint", 0.18, true)
+					game.TweenService
+						:Create(TextButton, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {
+							BackgroundColor3 = Color3.fromRGB(18, 18, 18),
+							TextColor3 = Color3.fromRGB(180, 180, 180),
+						})
+						:Play()
 				end)
 
 				TextButton.MouseButton1Down:Connect(function()
 					if not debounce1 then
 						debounce1 = true
-						TextButton:TweenSize(UDim2.new(0, 359,0, 30), "InOut", "Quint", 0.18, true)
-						game.TweenService:Create(TextButton, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),{
-							BackgroundColor3 = Color3.fromRGB(101, 168, 157),
-							TextColor3 = Color3.fromRGB(0,0,0)
-						}):Play()
+						TextButton:TweenSize(UDim2.new(0, 359, 0, 30), "InOut", "Quint", 0.18, true)
+						game.TweenService
+							:Create(
+								TextButton,
+								TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),
+								{
+									BackgroundColor3 = Color3.fromRGB(101, 168, 157),
+									TextColor3 = Color3.fromRGB(0, 0, 0),
+								}
+							)
+							:Play()
 						wait(1)
 						debounce1 = false
 					end
 				end)
 
 				TextButton.MouseEnter:Connect(function()
-					game.TweenService:Create(TextButton, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),{
-						BackgroundColor3 = Color3.fromRGB(30, 30, 30),
-						TextColor3 = Color3.fromRGB(250,250,250)
-					}):Play()
+					game.TweenService
+						:Create(TextButton, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {
+							BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+							TextColor3 = Color3.fromRGB(250, 250, 250),
+						})
+						:Play()
 				end)
 
 				TextButton.MouseLeave:Connect(function()
-					game.TweenService:Create(TextButton, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),{
-						BackgroundColor3 = Color3.fromRGB(18,18,18),
-						TextColor3 = Color3.fromRGB(180, 180, 180)
-					}):Play()
+					game.TweenService
+						:Create(TextButton, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {
+							BackgroundColor3 = Color3.fromRGB(18, 18, 18),
+							TextColor3 = Color3.fromRGB(180, 180, 180),
+						})
+						:Play()
 				end)
 			end
 
@@ -572,7 +611,7 @@ function Luxt1.CreateWindow(libName, logoId)
 				local togInList = Instance.new("UIListLayout")
 				local toginPad = Instance.new("UIPadding")
 				local UIListLayout = Instance.new("UIListLayout")
-				local a 
+				local a
 				--
 				toggInfo = toggInfo or "Toggle"
 				callback = callback or function() end
@@ -638,17 +677,17 @@ function Luxt1.CreateWindow(libName, logoId)
 					if not togDe then
 						togDe = true
 						on = not on
-						callback(on) 
+						callback(on)
 						if on then
 							checkBtn.Parent.toggleInfo.TextColor3 = Color3.fromRGB(153, 255, 238)
 							checkBtn.ImageColor3 = Color3.fromRGB(153, 255, 238)
 							checkBtn.ImageRectOffset = Vector2.new(4, 836)
-							checkBtn.ImageRectSize = Vector2.new(48,48)
+							checkBtn.ImageRectSize = Vector2.new(48, 48)
 						else
 							checkBtn.Parent.toggleInfo.TextColor3 = Color3.fromRGB(97, 97, 97)
 							checkBtn.ImageColor3 = Color3.fromRGB(97, 97, 97)
 							checkBtn.ImageRectOffset = Vector2.new(940, 784)
-							checkBtn.ImageRectSize = Vector2.new(48,48)
+							checkBtn.ImageRectSize = Vector2.new(48, 48)
 						end
 						wait(1)
 						togDe = false
@@ -656,11 +695,11 @@ function Luxt1.CreateWindow(libName, logoId)
 				end)
 
 				checkBtn.MouseButton1Up:Connect(function()
-					checkBtn.Parent:TweenSize(UDim2.new(0, 365,0, 36), "InOut", "Quint", 0.18, true)
+					checkBtn.Parent:TweenSize(UDim2.new(0, 365, 0, 36), "InOut", "Quint", 0.18, true)
 				end)
 
 				checkBtn.MouseButton1Down:Connect(function()
-					checkBtn.Parent:TweenSize(UDim2.new(0, 359,0, 30), "InOut", "Quint", 0.18, true)
+					checkBtn.Parent:TweenSize(UDim2.new(0, 359, 0, 30), "InOut", "Quint", 0.18, true)
 				end)
 			end
 
@@ -738,20 +777,20 @@ function Luxt1.CreateWindow(libName, logoId)
 				UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 				UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
 
-				key.MouseButton1Click:connect(function(e) 
-					keybindFrame:TweenSize(UDim2.new(0, 359,0, 30), "InOut", "Quint", 0.18, true)
+				key.MouseButton1Click:connect(function(e)
+					keybindFrame:TweenSize(UDim2.new(0, 359, 0, 30), "InOut", "Quint", 0.18, true)
 					key.Text = ". . ."
-					local a, b = game:GetService('UserInputService').InputBegan:wait();
+					local a, b = game:GetService("UserInputService").InputBegan:wait()
 					if a.KeyCode.Name ~= "Unknown" then
-						keybindFrame:TweenSize(UDim2.new(0, 365,0, 36), "InOut", "Quint", 0.18, true)
+						keybindFrame:TweenSize(UDim2.new(0, 365, 0, 36), "InOut", "Quint", 0.18, true)
 						key.Text = a.KeyCode.Name
-						oldKey = a.KeyCode.Name;
+						oldKey = a.KeyCode.Name
 					end
 				end)
 				local keyDebounce = false
-				game:GetService("UserInputService").InputBegan:connect(function(current, ok) 
-					if not ok then 
-						if current.KeyCode.Name == oldKey then 
+				game:GetService("UserInputService").InputBegan:connect(function(current, ok)
+					if not ok then
+						if current.KeyCode.Name == oldKey then
 							if not keyDebounce then
 								keyDebounce = true
 								callback()
@@ -771,7 +810,6 @@ function Luxt1.CreateWindow(libName, logoId)
 						end
 					end
 				end)
-
 			end
 
 			function ItemHandling:TextBox(infbix, textPlace, callback)
@@ -854,20 +892,22 @@ function Luxt1.CreateWindow(libName, logoId)
 
 				function anim(property)
 					if property == "Text" then
-						textboxFrame:TweenSize(UDim2.new(0, 359,0, 30), "InOut", "Quint", 0.18, true)
+						textboxFrame:TweenSize(UDim2.new(0, 359, 0, 30), "InOut", "Quint", 0.18, true)
 						wait(0.18)
-						textboxFrame:TweenSize(UDim2.new(0, 365,0, 36), "InOut", "Quint", 0.18, true)
+						textboxFrame:TweenSize(UDim2.new(0, 365, 0, 36), "InOut", "Quint", 0.18, true)
 					end
 				end
 				TextBox.Changed:Connect(anim)
 
 				TextBox.FocusLost:Connect(function(EnterPressed)
-					if not EnterPressed then return end
+					if not EnterPressed then
+						return
+					end
 					callback(TextBox.Text)
-					textboxFrame:TweenSize(UDim2.new(0, 359,0, 30), "InOut", "Quint", 0.18, true)
+					textboxFrame:TweenSize(UDim2.new(0, 359, 0, 30), "InOut", "Quint", 0.18, true)
 					wait(0.18)
-					textboxFrame:TweenSize(UDim2.new(0, 365,0, 36), "InOut", "Quint", 0.18, true)
-					TextBox.Text = ""  
+					textboxFrame:TweenSize(UDim2.new(0, 365, 0, 36), "InOut", "Quint", 0.18, true)
+					TextBox.Text = ""
 				end)
 			end
 
@@ -1019,30 +1059,41 @@ function Luxt1.CreateWindow(libName, logoId)
 
 				local mouse = game.Players.LocalPlayer:GetMouse()
 				local uis = game:GetService("UserInputService")
-				local Value;
+				local Value
 
 				sliderbtn.MouseButton1Down:Connect(function()
-					Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 150) * dragSlider.AbsoluteSize.X) + tonumber(minvalue)) or 0
+					Value = math.floor(
+						(((tonumber(maxvalue) - tonumber(minvalue)) / 150) * dragSlider.AbsoluteSize.X)
+							+ tonumber(minvalue)
+					) or 0
 					pcall(function()
 						callback(Value)
 					end)
 					dragSlider.Size = UDim2.new(0, math.clamp(mouse.X - dragSlider.AbsolutePosition.X, 0, 150), 0, 6)
 					moveconnection = mouse.Move:Connect(function()
 						dragPrecent.Text = Value
-						Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 150) * dragSlider.AbsoluteSize.X) + tonumber(minvalue))
+						Value = math.floor(
+							(((tonumber(maxvalue) - tonumber(minvalue)) / 150) * dragSlider.AbsoluteSize.X)
+								+ tonumber(minvalue)
+						)
 						pcall(function()
 							callback(Value)
 						end)
-						dragSlider.Size = UDim2.new(0, math.clamp(mouse.X - dragSlider.AbsolutePosition.X, 0, 150), 0, 6)
+						dragSlider.Size =
+							UDim2.new(0, math.clamp(mouse.X - dragSlider.AbsolutePosition.X, 0, 150), 0, 6)
 					end)
 					releaseconnection = uis.InputEnded:Connect(function(Mouse)
 						if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
-							Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 150) * dragSlider.AbsoluteSize.X) + tonumber(minvalue))
+							Value = math.floor(
+								(((tonumber(maxvalue) - tonumber(minvalue)) / 150) * dragSlider.AbsoluteSize.X)
+									+ tonumber(minvalue)
+							)
 							pcall(function()
 								callback(Value)
 							end)
 							dragPrecent.Text = Value
-							dragSlider.Size = UDim2.new(0, math.clamp(mouse.X - dragSlider.AbsolutePosition.X, 0, 150), 0, 6)
+							dragSlider.Size =
+								UDim2.new(0, math.clamp(mouse.X - dragSlider.AbsolutePosition.X, 0, 150), 0, 6)
 							moveconnection:Disconnect()
 							releaseconnection:Disconnect()
 						end
@@ -1055,46 +1106,64 @@ function Luxt1.CreateWindow(libName, logoId)
 							pcall(function()
 								callback(Value)
 							end)
-							local newSliderSize = math.floor(((Value - tonumber(minvalue)) / (tonumber(maxvalue) - tonumber(minvalue))) * 150)
+							local newSliderSize = math.floor(
+								((Value - tonumber(minvalue)) / (tonumber(maxvalue) - tonumber(minvalue))) * 150
+							)
 							dragSlider.Size = UDim2.new(0, math.clamp(newSliderSize, 0, 150), 0, 6)
 							dragPrecent.Text = Value
 						end
-						
-						game.TweenService:Create(dragPrecent, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{
-							BackgroundTransparency = 1,
-							TextTransparency = 1
-						}):Play()
-						game.TweenService:Create(triangle, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{
-							ImageTransparency = 1
-						}):Play()
+
+						game.TweenService
+							:Create(
+								dragPrecent,
+								TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),
+								{
+									BackgroundTransparency = 1,
+									TextTransparency = 1,
+								}
+							)
+							:Play()
+						game.TweenService
+							:Create(triangle, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+								ImageTransparency = 1,
+							})
+							:Play()
 					end)
 				end)
-				
+
 				local function hideSliderProps()
-					game.TweenService:Create(dragPrecent, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{
-						BackgroundTransparency = 1,
-						TextTransparency = 1
-					}):Play()
-					game.TweenService:Create(triangle, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{
-						ImageTransparency = 1
-					}):Play()
+					game.TweenService
+						:Create(dragPrecent, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+							BackgroundTransparency = 1,
+							TextTransparency = 1,
+						})
+						:Play()
+					game.TweenService
+						:Create(triangle, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+							ImageTransparency = 1,
+						})
+						:Play()
 				end
-				
+
 				local function showSliderProps()
-					game.TweenService:Create(dragPrecent, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{
-						BackgroundTransparency = 0,
-						TextTransparency = 0
-					}):Play()
-					game.TweenService:Create(triangle, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{
-						ImageTransparency = 0
-					}):Play()
+					game.TweenService
+						:Create(dragPrecent, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+							BackgroundTransparency = 0,
+							TextTransparency = 0,
+						})
+						:Play()
+					game.TweenService
+						:Create(triangle, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+							ImageTransparency = 0,
+						})
+						:Play()
 				end
 
 				function anim(property)
 					if property == "Size" then
-						sliderFrame:TweenSize(UDim2.new(0, 359,0, 30), "InOut", "Quint", 0.18, true)
+						sliderFrame:TweenSize(UDim2.new(0, 359, 0, 30), "InOut", "Quint", 0.18, true)
 						wait(0.18)
-						sliderFrame:TweenSize(UDim2.new(0, 365,0, 36), "InOut", "Quint", 0.18, true)
+						sliderFrame:TweenSize(UDim2.new(0, 365, 0, 36), "InOut", "Quint", 0.18, true)
 					end
 				end
 				dragSlider.Changed:Connect(anim)
@@ -1156,7 +1225,7 @@ function Luxt1.CreateWindow(libName, logoId)
 				TextLabel.Size = UDim2.new(0, 365, 0, 36)
 				TextLabel.ZIndex = 2
 				TextLabel.Font = Enum.Font.Gotham
-				TextLabel.Text = "  "..creditWho
+				TextLabel.Text = "  " .. creditWho
 				TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 				TextLabel.TextSize = 14.000
 				TextLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -1224,21 +1293,35 @@ function Luxt1.CreateWindow(libName, logoId)
 					if isDropped1 then
 						isDropped1 = false
 						DropDownFrame:TweenSize(UDim2.new(0, 365, 0, 36), "In", "Quint", 0.10)
-						game.TweenService:Create(expand_more, TweenInfo.new(0.10, Enum.EasingStyle.Quad, Enum.EasingDirection.In),{
-							Rotation = 0
-						}):Play()
+						game.TweenService
+							:Create(expand_more, TweenInfo.new(0.10, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
+								Rotation = 0,
+							})
+							:Play()
 						wait(0.10)
-						sectionFrame:TweenSize(UDim2.new(1,0, 0, sectionInnerList.AbsoluteContentSize.Y + 5), "In", "Quint", 0.10)
+						sectionFrame:TweenSize(
+							UDim2.new(1, 0, 0, sectionInnerList.AbsoluteContentSize.Y + 5),
+							"In",
+							"Quint",
+							0.10
+						)
 						wait(0.10)
 						UpdateSize()
 					else
 						isDropped1 = true
 						DropDownFrame:TweenSize(UDim2.new(0, 365, 0, DropYSize), "In", "Quint", 0.10)
-						game.TweenService:Create(expand_more, TweenInfo.new(0.10, Enum.EasingStyle.Quad, Enum.EasingDirection.In),{
-							Rotation = 180
-						}):Play()
+						game.TweenService
+							:Create(expand_more, TweenInfo.new(0.10, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
+								Rotation = 180,
+							})
+							:Play()
 						wait(0.10)
-						sectionFrame:TweenSize(UDim2.new(1,0, 0, sectionInnerList.AbsoluteContentSize.Y + 5), "In", "Quint", 0.10)
+						sectionFrame:TweenSize(
+							UDim2.new(1, 0, 0, sectionInnerList.AbsoluteContentSize.Y + 5),
+							"In",
+							"Quint",
+							0.10
+						)
 						wait(0.10)
 						UpdateSize()
 					end
@@ -1273,7 +1356,7 @@ function Luxt1.CreateWindow(libName, logoId)
 				UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
 				UIListLayout_3.VerticalAlignment = Enum.VerticalAlignment.Center
 
-				for i,v in next, list do
+				for i, v in next, list do
 					local optionBtnFrame = Instance.new("Frame")
 					local optionBtn1 = Instance.new("TextButton")
 					local UICorner_3 = Instance.new("UICorner")
@@ -1292,7 +1375,7 @@ function Luxt1.CreateWindow(libName, logoId)
 					optionBtn1.ZIndex = 2
 					optionBtn1.AutoButtonColor = false
 					optionBtn1.Font = Enum.Font.GothamSemibold
-					optionBtn1.Text = "  "..v
+					optionBtn1.Text = "  " .. v
 					optionBtn1.TextColor3 = Color3.fromRGB(120, 200, 187)
 					optionBtn1.TextSize = 14.000
 					optionBtn1.TextXAlignment = Enum.TextXAlignment.Left
@@ -1308,47 +1391,78 @@ function Luxt1.CreateWindow(libName, logoId)
 						wait()
 						isDropped = false
 						wait(0.10)
-						sectionFrame:TweenSize(UDim2.new(1,0, 0, sectionInnerList.AbsoluteContentSize.Y + 5), "In", "Quint", 0.10)
+						sectionFrame:TweenSize(
+							UDim2.new(1, 0, 0, sectionInnerList.AbsoluteContentSize.Y + 5),
+							"In",
+							"Quint",
+							0.10
+						)
 						wait(0.10)
 						UpdateSize()
-						game.TweenService:Create(expand_more, TweenInfo.new(0.10, Enum.EasingStyle.Quad, Enum.EasingDirection.In),{
-							Rotation = 0
-						}):Play()
+						game.TweenService
+							:Create(expand_more, TweenInfo.new(0.10, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
+								Rotation = 0,
+							})
+							:Play()
 					end)
 					optionBtn1.MouseButton1Down:Connect(function()
-						optionBtn1:TweenSize(UDim2.new(0, 335,0, 30), "InOut", "Quint", 0.12, true)
-						game.TweenService:Create(optionBtn1, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),{
-							BackgroundColor3 = Color3.fromRGB(21,21,21),
-							TextColor3 = Color3.fromRGB(180, 180, 180)
-						}):Play()
+						optionBtn1:TweenSize(UDim2.new(0, 335, 0, 30), "InOut", "Quint", 0.12, true)
+						game.TweenService
+							:Create(
+								optionBtn1,
+								TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),
+								{
+									BackgroundColor3 = Color3.fromRGB(21, 21, 21),
+									TextColor3 = Color3.fromRGB(180, 180, 180),
+								}
+							)
+							:Play()
 					end)
 
 					optionBtn1.MouseButton1Up:Connect(function()
-						optionBtn1:TweenSize(UDim2.new(0, 339,0, 34), "InOut", "Quint", 0.12, true)
-						game.TweenService:Create(optionBtn1, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),{
-							BackgroundColor3 = Color3.fromRGB(101, 168, 157),
-							TextColor3 = Color3.fromRGB(0,0,0)
-						}):Play()
+						optionBtn1:TweenSize(UDim2.new(0, 339, 0, 34), "InOut", "Quint", 0.12, true)
+						game.TweenService
+							:Create(
+								optionBtn1,
+								TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),
+								{
+									BackgroundColor3 = Color3.fromRGB(101, 168, 157),
+									TextColor3 = Color3.fromRGB(0, 0, 0),
+								}
+							)
+							:Play()
 					end)
 
 					optionBtn1.MouseEnter:Connect(function()
-						game.TweenService:Create(optionBtn1, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),{
-							BackgroundColor3 = Color3.fromRGB(15, 15, 15),
-							TextColor3 = Color3.fromRGB(250,250,250)
-						}):Play()
+						game.TweenService
+							:Create(
+								optionBtn1,
+								TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),
+								{
+									BackgroundColor3 = Color3.fromRGB(15, 15, 15),
+									TextColor3 = Color3.fromRGB(250, 250, 250),
+								}
+							)
+							:Play()
 					end)
 
 					optionBtn1.MouseLeave:Connect(function()
-						game.TweenService:Create(optionBtn1, TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),{
-							BackgroundColor3 = Color3.fromRGB(21, 21, 21),
-							TextColor3 = Color3.fromRGB(120, 200, 187)
-						}):Play()
+						game.TweenService
+							:Create(
+								optionBtn1,
+								TweenInfo.new(0.18, Enum.EasingStyle.Linear, Enum.EasingDirection.Out),
+								{
+									BackgroundColor3 = Color3.fromRGB(21, 21, 21),
+									TextColor3 = Color3.fromRGB(120, 200, 187),
+								}
+							)
+							:Play()
 					end)
 				end
 			end
-			
+
 			cryptobj(LuxtLib)
-			
+
 			return ItemHandling
 		end
 		return sectionHandling
