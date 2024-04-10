@@ -16,7 +16,7 @@
  * loadstring(game:HttpGet("https://lexploits.top/Roblox/Scripts/LExHub.lua"))()
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --]]
-local Lux = loadstring(game:HttpGet("https://lexploits.top/Roblox/Scripts/Required/Luxware.lua"))()
+local Lux = loadstring(game:HttpGet("https://raw.githubusercontent.com/LExteamz/website/main/Roblox/Scripts/Required/Luxware.lua"))()
 local getsfenv = loadstring(game:HttpGet("https://rc7.glitch.me/Roblox/Safe_ENV.lua"))()
 local getsaim = loadstring(game:HttpGet("https://rc7.glitch.me/Roblox/Slient_Aim.lua"))()
 local LEx = {}
