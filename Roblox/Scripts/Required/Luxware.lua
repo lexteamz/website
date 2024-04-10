@@ -1346,9 +1346,6 @@ function Luxt1.CreateWindow(libName, logoId)
 					end)
 				end
 			end
-
-			cryptobj(LuxtLib)
-
 			return ItemHandling
 		end
 		return sectionHandling
