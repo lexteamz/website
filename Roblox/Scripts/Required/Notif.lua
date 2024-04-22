@@ -220,6 +220,7 @@ local function FadeOutAfter(Object, Seconds)
 	end
 	wait(0.25)
 	table.remove(InstructionObjects, FindIndexByDependency(InstructionObjects, Object))
+	Object:Remove()
 	ResetObjects()
 end
 
@@ -227,6 +228,9 @@ cryptobj(NotifGui)
 
 return {
 	Notify = function(Properties)
+		local SoundService = game:GetService("SoundService")
+		local Sound = SoundService.Notification
+		
 		local Properties = typeof(Properties) == "table" and Properties or {}
 		local Title = Properties.Title
 		local Description = Properties.Description
@@ -265,11 +269,13 @@ return {
 			end
 			Shadow2px().Parent = NewLabel
 			NewLabel.Parent = Container
-
+			
 			table.insert(InstructionObjects, { NewLabel, 0, false })
 			coroutine.wrap(FadeOutAfter)(NewLabel, Duration)
 		end
 
+		Sound:Play()
+		
 		cryptobj(NotifGui)
 	end,
 }
