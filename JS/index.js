@@ -5,7 +5,6 @@ var Keydown = document.getElementById('keydown');
 var ToFeat = document.getElementById('ToFeat');
 var GoToLuau = document.getElementById('Luau');
 var GoToGitHub = document.getElementById('GoGitHub');
-var GoToFluxus = document.getElementById('Fluxus');
 var DownloadLInj = document.getElementById('downloadLInj');
 var GoToGitHub1 = document.getElementsByName('goToGitHub');
 var GoToDisc = document.getElementById('ToDisc');
@@ -80,33 +79,50 @@ function ClearFocused() {
     ToDownl.classList.remove('current');
 }
 
+function setActiveSection(sectionId) {
+    const sectionLinks = {
+        'home': ToHome,
+        'features': ToFeat,
+        'download': ToDownl,
+        'about': ToAbout
+        // Agregar más secciones si es necesario
+    };
+
+    // Remover la clase 'current' de todos los elementos
+    Object.values(sectionLinks).forEach(element => {
+        element.classList.remove('current');
+    });
+
+    // Agregar la clase 'current' al elemento correspondiente
+    const currentElement = sectionLinks[sectionId];
+    if (currentElement) {
+        currentElement.classList.add('current');
+    }
+}
+
 function onScroll() {
     const idSeccionVisible = obtenerSeccionVisible();
+    ClearFocused();
     switch (idSeccionVisible) {
         case 'home':
-            ClearFocused();
             ToHome.classList.add('current');
             break;
         case 'image':
             break;
         case 'features':
-            ClearFocused();
             ToFeat.classList.add('current');
             break;
         case 'features1':
-            ClearFocused();
             ToFeat.classList.add('current');
             break;
         case 'download':
-            ClearFocused();
             ToDownl.classList.add('current');
             break;
         case 'about':
-            ClearFocused();
             ToAbout.classList.add('current');
             break;
         default:
-            ClearFocused();
+            break;
     }
 
     const elementos = document.querySelectorAll('.hidden');
@@ -169,7 +185,6 @@ GetAccountName();
 
 GoToDisc.onclick = function () { GoToUrl("https://discord.gg/NQY28YSVAb"); }
 GoToGitHub.onclick = function () { GoToUrl(`https://github.com/${AccountName}/LInjector`); }
-GoToFluxus.onclick = function () { GoToUrl("https://fluxteam.net"); }
 GoToLuau.onclick = function () { GoToUrl("https://luau-lang.org/"); }
 ToHome.onclick = GoToHome;
 ToDownl.onclick = GoToDownload;
