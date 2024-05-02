@@ -85,15 +85,12 @@ function setActiveSection(sectionId) {
         'features': ToFeat,
         'download': ToDownl,
         'about': ToAbout
-        // Agregar más secciones si es necesario
     };
 
-    // Remover la clase 'current' de todos los elementos
     Object.values(sectionLinks).forEach(element => {
         element.classList.remove('current');
     });
 
-    // Agregar la clase 'current' al elemento correspondiente
     const currentElement = sectionLinks[sectionId];
     if (currentElement) {
         currentElement.classList.add('current');
@@ -150,7 +147,6 @@ function GetAccountName() {
         .then((response) => {
             AccountName = response;
 
-            // Asignar las URLs de los enlaces con el nombre de cuenta obtenido
             GoToGitHub1.forEach(link => {
                 link.href = `https://github.com/${AccountName}/LInjector`;
                 link.onclick = function () { GoToUrl(`https://github.com/${AccountName}/LInjector`); }
@@ -162,7 +158,6 @@ function GetAccountName() {
                 downloadURI(`https://github.com/${AccountName}/LInjector/releases/latest/download/LInjector.zip`);
             }
 
-            // Llamar a la función para construir la característica de código abierto
             buildOpenSourceFeature();
         })
         .catch((error) => {
