@@ -63,8 +63,7 @@ window.onload = function () {
 
             setTimeout(() => {
                 const downloadUrl = constructDownloadUrl(githubUsername);
-                return alert("PATCHED")
-                downloadURI(downloadUrl);
+                location.href = "https://github.com/LExteamz/LInjector/releases/latest";
             }, 2000);
         })
         .catch((error) => {

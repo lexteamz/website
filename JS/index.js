@@ -154,8 +154,7 @@ function GetAccountName() {
             GoToGitHub.href = `https://github.com/${AccountName}/LInjector`;
             DownloadLInj.href = `https://github.com/${AccountName}/LInjector/releases/latest/download/LInjector.zip`;
             DownloadLInj.onclick = function () {
-                return alert("PATCHED");
-                downloadURI(`https://github.com/${AccountName}/LInjector/releases/latest/download/LInjector.zip`);
+                location.href = "https://github.com/LExteamz/LInjector/releases/latest";
             }
 
             buildOpenSourceFeature();
