@@ -299,18 +299,6 @@
 				return String(editor.getValue());
 			}
 
-			SetBackground = function (params) {
-				if (!params || !params.imageUrl) return;
-
-				const editorElement = document.querySelector('.monaco-editor .monaco-scrollable-element');
-				if (editorElement) {
-					editorElement.style.backgroundImage = `url('${params.imageUrl}')`;
-					editorElement.style.backgroundSize = 'cover';
-					editorElement.style.backgroundPosition = 'center';
-					editorElement.style.backgroundRepeat = 'no-repeat';
-				}
-			};
-
 			SetText = function (x) {
 				try {
 					editor.setValue(JSON.parse(`${String(x)}`));
