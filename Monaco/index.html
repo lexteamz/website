@@ -6,7 +6,7 @@
 	<style type="text/css">
 		:root {
 			/* replace 'img_url' with your animated image or regular image link */
-			--url : url("");
+			--url: url("");
 			--url2: url("")
 		}
 
@@ -35,8 +35,6 @@
 			background-repeat: no-repeat;
 			background-attachment: fixed;
 		}
-
-		
 	</style>
 	<meta charset="utf-8" />
 	<title></title>
@@ -240,19 +238,20 @@
 
 				try {
 					if (CefSharp) {
-					editor.getModel().onDidChangeContent(function(e) {
-						if (!e.isFlush) {
-							CefSharp.PostMessage('keydown')
-						}
-					})
-					
-					CefSharp.PostMessage('init')
-					
-					setInterval(() => {
-						console.log("Save");
-						CefSharp.PostMessage('save_tabs')
-					}, 5000)
-				} } catch { }
+						editor.getModel().onDidChangeContent(function (e) {
+							if (!e.isFlush) {
+								CefSharp.PostMessage('keydown')
+							}
+						})
+
+						CefSharp.PostMessage('init')
+
+						setInterval(() => {
+							console.log("Save");
+							CefSharp.PostMessage('save_tabs')
+						}, 5000)
+					}
+				} catch { }
 
 				editor.getModel().updateOptions({ insertSpaces: false })
 			});
@@ -261,37 +260,37 @@
 				editor.layout();
 			}
 
-			Cut = function() {
+			Cut = function () {
 				editor.focus();
 				document.execCommand('cut');
 			}
 
-			Copy = function() {
+			Copy = function () {
 				editor.focus();
 				document.execCommand('copy');
 			}
 
-			Paste = function() {
+			Paste = function () {
 				editor.focus();
 				document.execCommand('paste');
 			}
 
-			Undo = function() {
+			Undo = function () {
 				editor.focus();
 				document.execCommand('undo');
 			}
 
-			Redo = function() {
+			Redo = function () {
 				editor.focus();
 				document.execCommand('redo');
 			}
 
-			Delete = function() {
+			Delete = function () {
 				editor.focus();
 				document.execCommand('delete');
 			}
 
-			SelectAll = function() {
+			SelectAll = function () {
 				editor.focus();
 				document.execCommand('selectAll');
 			}
@@ -299,6 +298,18 @@
 			GetText = function () {
 				return String(editor.getValue());
 			}
+
+			SetBackground = function (params) {
+				if (!params || !params.imageUrl) return;
+
+				const editorElement = document.querySelector('.monaco-editor .monaco-scrollable-element');
+				if (editorElement) {
+					editorElement.style.backgroundImage = `url('${params.imageUrl}')`;
+					editorElement.style.backgroundSize = 'cover';
+					editorElement.style.backgroundPosition = 'center';
+					editorElement.style.backgroundRepeat = 'no-repeat';
+				}
+			};
 
 			SetText = function (x) {
 				try {
@@ -398,7 +409,7 @@
 					fontLigatures: flag,
 				});
 			}
-			
+
 
 
 			ShowErr = function (line, column, endline, endcolumn, errMessage) {
@@ -451,13 +462,13 @@
 				console.log("Refresh");
 				editor.trigger('keyboard', 'type', { text: text });
 			}
-			
+
 			// window.onload = function() {
 			// 	if (!localStorage.lastscript) {
 			// 	  localStorage.lastscript = "";
 			// 	}
 			// 	editor.setValue(localStorage.lastscript);
-				
+
 			// 	setInterval(() => {
 			// 		console.log("Save script");
 			// 		localStorage.lastscript = String(editor.getValue());
