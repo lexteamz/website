@@ -92,7 +92,7 @@
 				return newProposals;
 			}
 
-			monaco.editor.defineTheme('net-theme-light', {
+			monaco.editor.defineTheme('vs-light', {
 				base: 'vs',
 				inherit: true,
 				rules: [
@@ -104,7 +104,7 @@
 				]
 			});
 
-			monaco.editor.defineTheme('net-theme-dark', {
+			monaco.editor.defineTheme('vs-dark', {
 				base: 'vs-dark',
 				inherit: true,
 				rules: [
@@ -116,7 +116,7 @@
 				]
 			});
 
-			monaco.editor.defineTheme('LIDark', {
+			monaco.editor.defineTheme('li-dark', {
 				base: 'vs-dark',
 				inherit: true,
 				rules: [
@@ -210,7 +210,7 @@
 				editor = monaco.editor.create(document.getElementById('container'), {
 					value: '',
 					language: 'lua',
-					theme: "LIDark",
+					theme: "li-dark",
 					fontSize: "14px",
 					fontFamily: "'JetBrains Mono', Consolas, 'Courier New', monospace",
 					folding: true,
@@ -325,15 +325,34 @@
 			}
 
 			SetTheme = function (themeName) {
-				if (themeName == 'LIDark') {
-					monaco.editor.setTheme('LIDark')
+				if (themeName == 'li-dark') {
+					monaco.editor.setTheme('li-dark')
 				}
-				if (themeName == "Dark") {
-					monaco.editor.setTheme("net-theme-dark");
+				if (themeName == "vs-dark") {
+					monaco.editor.setTheme("vs-dark");
 				}
-				if (themeName == "Light") {
-					monaco.editor.setTheme("net-theme-light");
+				if (themeName == "vs-light") {
+					monaco.editor.setTheme("vs-light");
 				}
+			}
+
+			BlurEditor = function (radius) {
+				let xd = document.getElementsByClassName("editor-scrollable")[0];
+				let xdd = document.getElementsByClassName("margin")[0];
+				xd.style.filter = `blur(${radius}px)`;
+				xdd.style.filter = `blur(${radius}px)`;
+			}
+
+			ToggleBlur = function (flag) {
+				if (flag === true) {
+					BlurEditor(5);
+				} else {
+					BlurEditor(0);
+				}
+			}
+
+			GetTheme = function () {
+				return String(editor._themeService._theme.themeName);
 			}
 
 			SwitchMinimap = function (flag) {
@@ -397,8 +416,6 @@
 					fontLigatures: flag,
 				});
 			}
-
-
 
 			ShowErr = function (line, column, endline, endcolumn, errMessage) {
 				editor.revealPositionInCenter({ lineNumber: line, column: column });

@@ -1380,7 +1380,7 @@
     z-index: 2000;
     padding: 0 1px 6px;
     left: 50%;
-    margin-left: -300px
+    margin-left: -300px;
 }
 
 .quick-input-titlebar {
@@ -1665,7 +1665,7 @@
     position: absolute;
     left: 0;
     top: 0;
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 .monaco-editor .margin-view-overlays .current-line.current-line-margin.current-line-margin-both {
@@ -1685,7 +1685,7 @@
     position: absolute;
     display: flex;
     align-items: center;
-    justify-content: center
+    justify-content: center;
 }
 
 .monaco-editor .lines-content .cigr,
@@ -3336,11 +3336,12 @@
 }
 
 .quick-input-widget {
-    font-size: 13px
+    font-size: 13px;
+    border-radius: 5px 0px 5px 5px;
 }
 
 .quick-input-widget .monaco-highlighted-label .highlight {
-    color: #0066bf
+    color: #0066bf;
 }
 
 .vs-dark .quick-input-widget .monaco-highlighted-label .highlight {
