@@ -325,15 +325,7 @@
 			}
 
 			SetTheme = function (themeName) {
-				if (themeName == 'li-dark') {
-					monaco.editor.setTheme('li-dark')
-				}
-				if (themeName == "vs-dark") {
-					monaco.editor.setTheme("vs-dark");
-				}
-				if (themeName == "vs-light") {
-					monaco.editor.setTheme("vs-light");
-				}
+				monaco.editor.setTheme(themeName);
 			}
 
 			BlurEditor = function (radius) {
