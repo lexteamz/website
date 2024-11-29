@@ -351,6 +351,14 @@
 				}
 			}
 
+			EnableDisableBlur = function () {
+				if (document.getElementsByClassName("editor-scrollable")[0].style.filter === "blur(5px)") {
+					BlurEditor(0);
+				} else {
+					BlurEditor(5);
+				}
+			}
+
 			GetTheme = function () {
 				return String(editor._themeService._theme.themeName);
 			}
