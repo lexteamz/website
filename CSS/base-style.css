@@ -19,27 +19,29 @@ html {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 0px;
     transition: 0.2s;
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(15, 15, 15, 1);
+    background: rgba(15, 15, 15, 0);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(30, 30, 30, 1);
+    background: rgba(30, 30, 30, 0);
     transition: 0.2s;
+    border-radius: 25px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(35, 35, 35);
-    transition: 0.2s;
+    background: rgb(35, 35, 35, 0.5);
+    transition: 0.7s;
 }
 
 ::selection {
-    background: #65648f;
+    background: #603aa7;
 }
+
 
 .hov-und-anm {
     display: inline-block;
@@ -80,8 +82,8 @@ a:active {
 }
 
 .main {
-    background-image: linear-gradient(315deg, #101010, #090909);
     background-image: -moz-linear-gradient(315deg, #101010, #090909);
+    background-image: linear-gradient(315deg, #101010, #090909);
 }
 
 .nav {
