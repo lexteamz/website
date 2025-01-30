@@ -18,7 +18,7 @@
 			padding: 0;
 			overflow: hidden;
 			font-family: Consolas, 'Courier New', monospace;
-			color: white;
+			color: transparent;
 		}
 
 		.margin:first-child {
@@ -116,6 +116,86 @@
 				]
 			});
 
+			monaco.editor.defineTheme('transparent-li-dark', {
+				base: 'vs-dark',
+				inherit: true,
+				rules: [
+					{ token: '', foreground: '#ffffff' },
+					{ token: 'variable.language.self', foreground: '#F7768E' },
+					{ token: 'variable.parameter.variadic', foreground: '#F7768E' },
+					{ token: 'variable.parameter.function', foreground: '#E0AF68' },
+					{ token: 'variable.other.constant', foreground: '#aeafad' },
+					{ token: 'variable.property', foreground: '#c6c6c6' },
+					{ token: 'variable.object.property', foreground: '#73DACA' },
+
+					{ token: 'keyword', foreground: '#cc99cc' },
+					{ token: 'keyword.local', foreground: '#CC99CC', fontStyle: 'bold' },
+					{ token: 'keyword.operator', foreground: '#89DDFF' },
+					{ token: 'keyword.operator.type.annotation', foreground: '#9ABDF5' },
+					{ token: 'keyword.operator.typedef.annotation', foreground: '#89DDFF' },
+					{ token: 'keyword.control.export', foreground: '#997BD6', fontStyle: 'italic' },
+
+					{ token: 'operator', foreground: '#d4d4d4' },
+					{ token: 'operator.type', foreground: '#cc99cc' },
+					{ token: 'operator.special', foreground: '#dcdcdc' },
+
+					{ token: 'entity.name.type.alias', foreground: '#5ab6d6' },
+					{ token: 'entity.name.function', foreground: '#6699CC', fontStyle: 'bold' },
+
+					{ token: 'global', foreground: '#6699CC' },
+
+					{ token: 'storage.type', foreground: '#cc99cc' },
+
+					{ token: 'comment', foreground: '#999999' },
+					{ token: 'comment.highlight.title', foreground: '#89DDFF', fontStyle: 'italic' },
+					{ token: 'comment.highlight.name', foreground: '#89DDFF', fontStyle: 'italic' },
+					{ token: 'comment.delimiter.modifier', foreground: '#9ABDF5', fontStyle: 'italic' },
+					{ token: 'comment.highlight.modifier', foreground: '#c6c6c6', fontStyle: 'italic' },
+					{ token: 'comment.highlight.descriptor', foreground: '#F7768E', fontStyle: 'italic' },
+
+					{ token: 'delimiter.longstring', foreground: '#89DDFF' },
+					{ token: 'delimiter.bracket', foreground: '#a6afbd' },
+					{ token: 'delimiter.array', foreground: '#a6afbd' },
+					{ token: 'delimiter.parenthesis', foreground: '#a6afbd' },
+					{ token: 'delimiter', foreground: '#a6afbd' },
+
+					{ token: 'string', foreground: '#99cc99' },
+					{ token: 'longstring', foreground: '#99cc99' },
+					{ token: 'string.delimeter', foreground: '#99cc99' },
+					{ token: 'string.escape', foreground: '#99cc99' },
+
+					{ token: 'punctuation.separator.arguments', foreground: '#9ABDF5' },
+					{ token: 'punctuation.separator.parameter', foreground: '#89DDFF' },
+					{ token: 'punctuation.separator.table', foreground: '#89DDFF' },
+					{ token: 'punctuation.definition.block', foreground: '#9ABDF5' },
+					{ token: 'punctuation.definition.parameters', foreground: '#9ABDF5' },
+					{ token: 'punctuation.definition.typeparameters', foreground: '#89DDFF' },
+
+					{ token: 'constant.language', foreground: '#d4d4d4' },
+					{ token: 'number', foreground: '#f99157' },
+					{ token: 'constants', foreground: '#cc99cc', fontStyle: 'bold' },
+
+					// { token: 'support.function', foreground: '#0DB9D7' },
+					// { token: 'support.function.library', foreground: '#0DB9D7' },
+					// { token: 'support.type', foreground: '#0DB9D7' },
+					{ token: 'support.function', foreground: '#6699CC', fontStyle: 'bold' },
+					{ token: 'support.function.library', foreground: '#6699CC' },
+					{ token: 'support.type', foreground: '#5ab6d6' },
+				],
+				colors: {
+					'editor.background': '#00000000',
+					'editorLineNumber.foreground': '#7A7A7A',
+					'editorLineNumber.activeForeground': '#BBBBBB',
+					'editorIndentGuide.background': '#282828',
+					'editorSuggestWidget.background': "#181818",
+					'editorSuggestWidget.border': "#000000",
+					'editorSuggestWidget.foreground': "#D5D5D5",
+					'editorSuggestWidget.selectedBackground': "#363636",
+					'editorSuggestWidget.highlightForeground': "#18A0FB",
+					'textCodeBlock.background': '#181818',
+				}
+			});
+
 			monaco.editor.defineTheme('li-dark', {
 				base: 'vs-dark',
 				inherit: true,
@@ -183,7 +263,7 @@
 					{ token: 'support.type', foreground: '#5ab6d6' },
 				],
 				colors: {
-					'editor.background': '#141414',
+					'editor.background': '#111111',
 					'editorLineNumber.foreground': '#7A7A7A',
 					'editorLineNumber.activeForeground': '#BBBBBB',
 					'editorIndentGuide.background': '#282828',
