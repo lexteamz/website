@@ -24,51 +24,14 @@ function ReadVersionContent() {
         .catch((e) => console.error(e));
 }
 
-function ReadAccountContent() {
-    return fetch("../accountname")
-        .then((res) => {
-            if (!res.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return res.text();
-        })
-        .catch((e) => console.error(e));
-}
-
-function constructDownloadUrl(accountName) {
-    return `https://github.com/${accountName}/LInjector/releases/latest/download/LInjector.zip`;
-}
-
 window.onload = function () {
-    let githubUsername;  // Define tu variable githubUsername aquí o asigna un valor
-
-    function ReadAccountContent() {
-        return fetch("../accountname")
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return res.text();
-            })
-            .catch((e) => console.error(e));
-    }
-
-    function constructDownloadUrl(accountName) {
-        return `https://github.com/${accountName}/LInjector/releases/latest/download/LInjector.zip`;
-    }
-
-    ReadAccountContent()
-        .then((accountName) => {
-            githubUsername = accountName;
-
-            setTimeout(() => {
-                const downloadUrl = constructDownloadUrl(githubUsername);
-                location.href = "https://github.com/LExteamz/LInjector/releases/latest";
-            }, 2000);
-        })
-        .catch((error) => {
-            console.error("Error al leer el contenido de la cuenta:", error);
-        });
+    function redirectToUrl(url) {
+		location.href = (url);
+	}
 
     ReadVersionContent();
+
+    setTimeout(() => {
+        redirectToUrl("https://go.lexploits.top/update");
+    }, 5000);
 };
