@@ -29,7 +29,7 @@
 .currentsupported {
     margin-top: 15px;
     color: gray;
-    text-align: justify;
+    text-align: left;
 }
 
 #ToHome:hover {
