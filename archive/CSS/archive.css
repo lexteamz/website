@@ -11,7 +11,7 @@
 }
 
 .version-list {
-    width: 80%;
+    width: 90%;
     max-width: 800px;
     margin: 0 auto;
     font-family: "Space Grotesk", monospace;
@@ -27,7 +27,8 @@
     transition: transform 0.3s, box-shadow 0.3s;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
 }
 
 .version-item:hover {
@@ -64,6 +65,9 @@
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .version-date {
@@ -120,9 +124,21 @@
     animation: fadeIn 0.2s ease-in-out;
 }
 
+#pero_no_le_creo_nada {
+    text-align: left;
+    padding: 0px 15px;
+}
+
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .version-item:nth-last-child(-n+3) .version-description-full {
@@ -160,32 +176,47 @@
     line-height: 1.5;
 }
 
-.markdown-body h1, .markdown-body h2, .markdown-body h3, 
-.markdown-body h4, .markdown-body h5, .markdown-body h6 {
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
     margin-top: 16px;
     margin-bottom: 8px;
     font-weight: 600;
     color: white;
 }
 
-.markdown-body h1 { font-size: 1.5rem; }
-.markdown-body h2 { font-size: 1.3rem; }
-.markdown-body h3 { font-size: 1.1rem; }
+.markdown-body h1 {
+    font-size: 1.5rem;
+}
+
+.markdown-body h2 {
+    font-size: 1.3rem;
+}
+
+.markdown-body h3 {
+    font-size: 1.1rem;
+}
 
 .markdown-body p {
     margin-top: 0;
     margin-bottom: 10px;
-    white-space: pre-line; /* Preserva los saltos de línea */
+    white-space: pre-line;
+    /* Preserva los saltos de línea */
 }
 
-.markdown-body ul, .markdown-body ol {
+.markdown-body ul,
+.markdown-body ol {
     padding-left: 20px;
     margin-bottom: 10px;
 }
 
 .markdown-body li {
     margin-bottom: 3px;
-    white-space: pre-line; /* Preserva los saltos de línea en listas */
+    white-space: pre-line;
+    /* Preserva los saltos de línea en listas */
 }
 
 .markdown-body code {
@@ -207,7 +238,8 @@
 .markdown-body pre code {
     background-color: transparent;
     padding: 0;
-    white-space: pre; /* Preserva exactamente el formato en bloques de código */
+    white-space: pre;
+    /* Preserva exactamente el formato en bloques de código */
 }
 
 .markdown-body a {
@@ -246,8 +278,22 @@
     margin-left: 10px;
 }
 
+.archived-tag {
+    background-color: transparent;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: 10px;
+    border: 1px solid gold;
+}
+
 .version-download {
-    margin-left: 15px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    margin-top: 5px;
 }
 
 .download-btn {
@@ -260,9 +306,27 @@
     font-family: "Space Grotesk", monospace;
     font-size: 0.9rem;
     transition: background-color 0.3s;
+    width: 100%;
 }
 
 .download-btn:hover {
+    background-color: #603aa7;
+}
+
+.see-tag {
+    background-color: transparent;
+    border: 1px solid #603aa7;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Space Grotesk", monospace;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.see-tag:hover {
     background-color: #603aa7;
 }
 
@@ -278,4 +342,92 @@
     color: #ff5555;
     font-family: "Space Grotesk", monospace;
     margin-top: 50px;
+}
+
+/* Media Queries para diseño responsive */
+@media screen and (max-width: 768px) {
+    .center {
+        padding-top: 70px;
+    }
+
+    .version-list {
+        width: 95%;
+    }
+
+    .version-item {
+        padding: 12px 15px;
+    }
+
+    .version-info {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .version-download {
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .version-description-full {
+        position: fixed;
+        left: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 90%;
+        max-height: 80vh;
+        z-index: 1000;
+    }
+
+    .version-item:nth-last-child(-n+3) .version-description-full {
+        bottom: auto;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1#pero_no_le_creo_nada {
+        font-size: 1.5rem;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .version-number {
+        font-size: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .version-tag,
+    .user-tag,
+    .archived-tag {
+        margin-left: 5px;
+        margin-top: 5px;
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+
+    .version-text {
+        margin-top: 5px;
+    }
+
+    .version-download {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .see-tag {
+        margin-left: 0;
+    }
+
+    .version-description-full {
+        padding: 10px;
+    }
+
+    .close-button {
+        top: 5px;
+        right: 5px;
+    }
 }

@@ -7,6 +7,7 @@ var GoToLuau = document.getElementById('Luau');
 var GoToGitHub = document.getElementById('GoGitHub');
 var DownloadLInj = document.getElementById('downloadLInj');
 var GoToGitHub1 = document.getElementsByName('goToGitHub');
+var GoToArchive = document.getElementById('GoToArchive');
 var GoToDisc = document.getElementById('ToDisc');
 var AccountName = "";
 
