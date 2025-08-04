@@ -408,6 +408,15 @@
 				monaco.editor.setTheme(themeName);
 			}
 
+			ChangeEditorTransparency = function(float) {
+				// Change the whole document transparency from 0 to 1
+				let xd = document.getElementsByClassName("editor-scrollable")[0];
+				let xdd = document.getElementsByClassName("margin")[0];
+
+				xd.style.opacity = float;
+				xdd.style.opacity = float;
+			}
+
 			BlurEditor = function (radius) {
 				let xd = document.getElementsByClassName("editor-scrollable")[0];
 				let xdd = document.getElementsByClassName("margin")[0];
