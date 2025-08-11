@@ -5,7 +5,7 @@ var Keydown = document.getElementById('keydown');
 var ToFeat = document.getElementById('ToFeat');
 var GoToLuau = document.getElementById('Luau');
 var GoToGitHub = document.getElementById('GoGitHub');
-var DownloadLInj = document.getElementById('downloadLInj');
+var DownloadLInj = document.getElementsByClassName('DownloaderButton');
 var GoToGitHub1 = document.getElementsByName('goToGitHub');
 var GoToArchive = document.getElementById('GoToArchive');
 var GoToDisc = document.getElementById('ToDisc');
@@ -153,10 +153,6 @@ function GetAccountName() {
                 link.onclick = function () { GoToUrl(`https://github.com/${AccountName}/LInjector`); }
             });
             GoToGitHub.href = `https://github.com/${AccountName}/LInjector`;
-            DownloadLInj.href = `https://github.com/${AccountName}/LInjector/releases/latest/download/LInjector.zip`;
-            DownloadLInj.onclick = function () {
-                location.href = "/download";
-            }
 
             buildOpenSourceFeature();
         })
@@ -185,6 +181,13 @@ ToHome.onclick = GoToHome;
 ToDownl.onclick = GoToDownload;
 Keydown.onclick = GoToImage;
 ToFeat.onclick = GoToFeatures;
+
+Array.from(DownloadLInj).forEach(item => {
+    // item.href = `https://github.com/${AccountName}/LInjector/releases/latest/download/LInjector.zip`;
+    item.onclick = function () {
+        location.href = "/download";
+    };
+});
 
 addCustomFeature("Focused on achieving maximum compatibility", "LInjector is meticulously engineered to uphold the highest level of compatibility with a diverse range of scripts and programming environments, prioritizing seamless integration and smooth operation.");
 addCustomFeature("Tailored Functions for Real Environment", "LInjector incorporates specialized functions that enable users to interact with their authentic computer environment. These include features like rconsole, setclipboard, and more.");
